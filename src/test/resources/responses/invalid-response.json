@@ -1,0 +1,5 @@
+{
+  "title": "Unable to perform query",
+  "detail": "Query might be invalid from datastore engine point of view",
+  "instance": "/v1/queries"
+}

@@ -1,0 +1,85 @@
+### Total Clicks for a given Datasource for a given Date range
+POST http://localhost:8080/v1/queries
+Content-Type: application/json
+
+{
+  "metrics": [
+    {
+      "metric": "data_source"
+    },
+    {
+      "metric": "SUM(clicks)",
+      "alias": "total_clicks"
+    }
+  ],
+  "filters": [
+    {
+      "key": "data_source",
+      "operator": "=",
+      "value": "Google Ads"
+    },
+    {
+      "key": "daily",
+      "operator": ">",
+      "value": "2020-01-01"
+    },
+    {
+      "key": "daily",
+      "operator": "<",
+      "value": "2021-01-01"
+    }
+  ],
+  "groups": [
+    {
+      "group": "data_source"
+    }
+  ]
+}
+
+### Click-Through Rate (CTR) per Datasource and Campaign
+POST http://localhost:8080/v1/queries
+Content-Type: application/json
+
+{
+  "metrics": [
+    {
+      "metric": "data_source"
+    },
+    {
+      "metric": "campaign"
+    },
+    {
+      "metric": "SUM(clicks) * 100 / SUM(impressions)",
+      "alias": "CTR"
+    }
+  ],
+  "groups": [
+    {
+      "group": "data_source"
+    },
+    {
+      "group": "campaign"
+    }
+  ]
+}
+
+### Impressions over time (daily)
+POST http://localhost:8080/v1/queries
+Content-Type: application/json
+
+{
+  "metrics": [
+    {
+      "metric": "daily"
+    },
+    {
+      "metric": "SUM(impressions)",
+      "alias": "impressions_over_time"
+    }
+  ],
+  "groups": [
+    {
+      "group": "daily"
+    }
+  ]
+}

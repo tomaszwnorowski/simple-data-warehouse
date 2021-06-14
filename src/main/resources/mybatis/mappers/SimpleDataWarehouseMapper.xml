@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sdw.warehouse.SimpleDataWarehouseMapper">
+    <insert id="insert">
+        insert into analytics_tb (data_source, campaign, daily, clicks, impressions)
+        values (#{dataSource}, #{campaign}, #{daily}, #{clicks}, #{impressions})
+    </insert>
+
+    <select id="query" resultType="java.util.LinkedHashMap">
+        SELECT
+            <foreach item="metric" separator="," collection="metrics">
+              ${metric.evaluate()}
+            </foreach>
+        FROM analytics_tb
+        <where>
+            <foreach item="filter" separator=" AND " collection="filters">
+              ${filter.evaluate()}
+            </foreach>
+        </where>
+
+        <foreach item="group" separator="," collection="groups" open="GROUP BY ">
+            ${group.evaluate()}
+        </foreach>
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT count(*) FROM analytics_tb
+    </select>
+</mapper>

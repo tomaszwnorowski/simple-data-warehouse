@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/${POSTGRES_DBNAME:warehouse}"
+    username: ${POSTGRES_USERNAME:admin}
+    password: ${POSTGRES_PASSWORD:admin}
+
+mybatis:
+  mapper-locations: "classpath*:/mybatis/mappers/*.xml"
+  config-location: "classpath:/mybatis/MyBatis.xml"
+
+etl:
+  csvLocation: "file:src/main/resources/?fileName=analytics.csv"
+
+logging:
+  level:
+    sdw: INFO
+    sdw.warehouse.SimpleDataWarehouseMapper.query: DEBUG

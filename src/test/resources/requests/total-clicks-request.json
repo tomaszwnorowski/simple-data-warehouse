@@ -1,0 +1,33 @@
+{
+  "metrics": [
+    {
+      "metric": "data_source"
+    },
+    {
+      "metric": "SUM(clicks)",
+      "alias": "total_clicks"
+    }
+  ],
+  "filters": [
+    {
+      "key": "data_source",
+      "operator": "=",
+      "value": "Google Ads"
+    },
+    {
+      "key": "daily",
+      "operator": ">",
+      "value": "2020-01-01"
+    },
+    {
+      "key": "daily",
+      "operator": "<",
+      "value": "2021-01-01"
+    }
+  ],
+  "groups": [
+    {
+      "group": "data_source"
+    }
+  ]
+}
